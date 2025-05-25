@@ -1,0 +1,34 @@
+// Pin yang digunakan
+const int potPin = A0;    // Pin analog untuk potensiometer
+const int ledPin = 9;     // Pin PWM untuk LED
+
+// Variabel untuk menyimpan nilai
+int potValue = 0;         // Nilai dari potensiometer (0-1023)
+int ledValue = 0;         // Nilai untuk LED (0-255)
+
+void setup() {
+  // Mengatur pin LED sebagai output
+  pinMode(ledPin, OUTPUT);
+  
+  // Memulai serial monitor (opsional)
+  Serial.begin(9600);
+}
+
+void loop() {
+  potValue = analogRead(potPin);
+  
+  if (potValue > 512) {  // Threshold 50%
+    ledValue = map(potValue, 512, 1023, 0, 255);
+  } else {
+    ledValue = 0;  // LED mati di bawah 50%
+  }
+  
+  analogWrite(ledPin, ledValue);
+  delay(10);
+}
+  
+  // Menampilkan nilai di serial monitor (opsional)
+ 
+  
+  // Jeda kecil untuk stabilisasi
+ 
